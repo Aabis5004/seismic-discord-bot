@@ -1,0 +1,177 @@
+[README (1).md](https://github.com/user-attachments/files/24941037/README.1.md)
+# 🌊 Seismic Discord Analytics Bot
+
+A Discord bot that tracks messages, roles (Mag 1-5), art submissions, and generates leaderboards for the Seismic community.
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 📊 **Message Tracking** | Counts messages per user, per channel |
+| 🏆 **Leaderboards** | Top contributors by messages |
+| 🎨 **Art Tracking** | Tracks submissions in art channels |
+| 🏷️ **Role Analytics** | Mag 1-5 role distribution |
+| 📈 **Daily Stats** | Daily activity tracking |
+| 💬 **Slash Commands** | Easy-to-use Discord commands |
+
+## 📋 Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| `/leaderboard` | Show top message senders |
+| `/stats` | Show server statistics |
+| `/mystats` | Show your personal stats |
+| `/userstats @user` | Show stats for a specific user |
+| `/topart` | Show top art contributors |
+| `/roles` | Show Mag role distribution |
+
+## 🚀 Setup Guide
+
+### Step 1: Create Discord Application
+
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Click **"New Application"**
+3. Name it: `Seismic Analytics`
+4. Go to **"Bot"** section
+5. Click **"Add Bot"**
+6. Copy the **Bot Token** (keep it secret!)
+7. Enable these **Privileged Gateway Intents**:
+   - ✅ PRESENCE INTENT
+   - ✅ SERVER MEMBERS INTENT
+   - ✅ MESSAGE CONTENT INTENT
+
+### Step 2: Get Your IDs
+
+**Application/Client ID:**
+- In Developer Portal → General Information → Copy "Application ID"
+
+**Server ID:**
+- In Discord, enable Developer Mode (Settings → Advanced → Developer Mode)
+- Right-click the Seismic server → "Copy ID"
+
+### Step 3: Configure the Bot
+
+1. Copy `.env.example` to `.env`
+2. Fill in your values:
+
+```env
+DISCORD_TOKEN=your_bot_token_here
+CLIENT_ID=your_client_id_here
+GUILD_ID=seismic_server_id_here
+```
+
+### Step 4: Install & Run
+
+```bash
+# Install dependencies
+npm install
+
+# Start the bot
+npm start
+
+# Or for development (auto-restart)
+npm run dev
+```
+
+### Step 5: Invite Bot to Server
+
+Generate invite link:
+```
+https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=274878024704&scope=bot%20applications.commands
+```
+
+Replace `YOUR_CLIENT_ID` with your actual Client ID.
+
+**Required Permissions:**
+- Read Messages/View Channels
+- Send Messages
+- Embed Links
+- Read Message History
+- Use Slash Commands
+
+## 🔥 Hosting Options (Free)
+
+### Option 1: Railway.app (Recommended)
+1. Go to [railway.app](https://railway.app)
+2. Connect your GitHub
+3. Deploy from repo
+4. Add environment variables in dashboard
+
+### Option 2: Render.com
+1. Go to [render.com](https://render.com)
+2. Create new "Background Worker"
+3. Connect GitHub repo
+4. Add environment variables
+
+### Option 3: Replit
+1. Create new Repl
+2. Import from GitHub
+3. Add secrets (environment variables)
+4. Use UptimeRobot to keep alive
+
+## 📊 Data Structure (Firebase)
+
+```
+discord/
+├── users/
+│   └── {userId}/
+│       ├── username
+│       ├── displayName
+│       ├── totalMessages
+│       ├── artSubmissions
+│       ├── magRole
+│       ├── lastActive
+│       ├── channels/
+│       │   └── {channelId}: messageCount
+│       └── daily/
+│           └── {date}: messageCount
+├── channels/
+│   └── {channelId}/
+│       ├── name
+│       └── totalMessages
+└── stats/
+    ├── totalMessages
+    ├── totalArt
+    ├── totalMembers
+    ├── roles/
+    │   ├── Mag_1: count
+    │   ├── Mag_2: count
+    │   └── ...
+    └── daily/
+        └── {date}: messageCount
+```
+
+## 🎨 Customization
+
+### Change Tracked Roles
+Edit `CONFIG.MAG_ROLES` in `bot.js`:
+```javascript
+MAG_ROLES: ['Mag 1', 'Mag 2', 'Mag 3', 'Mag 4', 'Mag 5', 'OG'],
+```
+
+### Change Art Channels
+Edit `CONFIG.ART_CHANNELS` in `bot.js`:
+```javascript
+ART_CHANNELS: ['art', 'artwork', 'memes', 'creations'],
+```
+
+## 🔐 Security Notes
+
+- **Never share your Bot Token!**
+- Keep `.env` in `.gitignore`
+- Use environment variables for hosting
+- Bot needs minimal permissions
+
+## 📝 License
+
+MIT License - Feel free to modify for your community!
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create feature branch
+3. Submit pull request
+
+---
+
+Made with 💜 for the Seismic Community
